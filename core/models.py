@@ -6,6 +6,7 @@ from phonenumbers import parse, geocoder
 # Create your models here.
 class Pessoa(models.Model):
     nome = models.CharField(max_length=50, null=False, blank=False)
+    nascimento = models.DateField(help_text='Data de nascimento para saber os aniversariantes da semana')
     slug = models.SlugField(unique=True, help_text="Preenchido automaticamente para facilitar a sua vida. Por favor não altere")
     telefone = PhoneNumberField(blank=False, null=False)
     cidade = models.CharField(max_length=40)

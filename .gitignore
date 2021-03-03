@@ -110,6 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 bin/
+bin/gunicorn
 
 # Spyder project settings
 .spyderproject
