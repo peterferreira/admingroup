@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,8 +26,7 @@ SECRET_KEY = '$)6hw^v)&1%u6(84_6l@(w_1=43az#7+q#=4!!(@upfw%vv87l'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.2.14',
-    '192.168.2.0/24',
+    '192.168.0.0/16',
 ]
 
 
@@ -48,6 +47,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+# WhiteNoise para uso do heroku, não sei por que está aqui.
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,6 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# Adicionado por conta do WhiteNoise, para uso com o Heroku
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # 3RD PARTY
 PHONENUMBER_DEFAULT_REGION="BR"
