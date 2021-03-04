@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '192.168.0.0/16',
     '127.0.0.1',
+    'localhost',
 ]
 
 
@@ -134,3 +135,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # 3RD PARTY
 PHONENUMBER_DEFAULT_REGION="BR"
 PHONENUMBER_DB_FORMAT="NATIONAL"
+
