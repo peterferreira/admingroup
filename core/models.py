@@ -35,7 +35,7 @@ class Pessoa(models.Model):
 
     def getcep(self, cep):
         try:
-            j = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep.replace('-','')))
+            j = requests.get('https://viacep.com.br/ws/{}/json/'.format(cep.replace('-', '')))
             r = j.json()
             endereco = r['logradouro']
             bairro = r['bairro']
@@ -43,9 +43,7 @@ class Pessoa(models.Model):
             estado = r['uf']
             return (endereco, cidade, estado, bairro)
         except:
-            if '-' not in cep:
-                cep = cep[5:] + '-' + cep[-3:]
-            j = requests.get('https://geocode.xyz/{}?json=1'.format(cep))
+            j = requests.get('https://geocode.xyz/{}?json=1'.format(cep[5:] + '-' + cep[-3:]))
             r = j.json()['standard']
             end = ''
             en = r['addresst'].split()
@@ -56,12 +54,10 @@ class Pessoa(models.Model):
             cidade = r['city']
             estado = r['region']
             return (endereco, cidade, estado, '')
-        finally:
-            return ('', '', '', '')
 
 
     def save(self):
-        if self.cep and not self.endereco:
+        if self.cep:
             resposta = self.getcep(self.cep)
             self.endereco = resposta[0]
             self.cidade = resposta[1]
